@@ -1,5 +1,42 @@
 #include "drawingcanvas.h"
 
+CustomMatrix createVerticalDetector(int size) {
+    bool pattern[10][10] = {false};
+    int center1 = (size / 2) - 1;
+    int center2 = size / 2;
+    for (int r = 0; r < size; r++) {
+        pattern[r][center1] = true;
+        pattern[r][center2] = true;
+    }
+    return CustomMatrix(pattern);
+}
+
+CustomMatrix createHorizontalDetector(int size) {
+    bool pattern[10][10] = {false};
+    int center1 = (size / 2) - 1;
+    int center2 = size / 2;
+    for (int c = 0; c < size; c++) {
+        pattern[center1][c] = true;
+        pattern[center2][c] = true;
+    }
+    return CustomMatrix(pattern);
+}
+
+CustomMatrix createThickDotDetector(int size, int dot_size = 3) {
+    bool pattern[10][10] = {false};
+    int start = (size / 2) - (dot_size / 2);
+    int end = start + dot_size - 1;
+
+    for (int r = start; r <= end; r++) {
+        for (int c = start; c <= end; c++) {
+            if (r >= 0 && r < size && c >= 0 && c < size) {
+                pattern[r][c] = true;
+            }
+        }
+    }
+    return CustomMatrix(pattern);
+}
+
 DrawingCanvas::DrawingCanvas(QWidget *parent)  {
     // Set a minimum size for the canvas
     setMinimumSize(this->WINDOW_WIDTH, this->WINDOW_HEIGHT);
@@ -23,24 +60,25 @@ void DrawingCanvas::paintLines(){
 }
 
 void DrawingCanvas::segmentDetection(){
-    QPixmap pixmap = this->grab(); //
+    QPixmap pixmap = this->grab();
     QImage image = pixmap.toImage();
 
-    cout << "image width " << image.width() << endl;
-    cout << "image height " << image.height() << endl;
+    int width = image.width();
+    int height = image.height();
+    const int WINDOW_SIZE = 10; // New window size
 
-    //To not crash we set initial size of the matrix
-    vector<CustomMatrix> windows(image.width()*image.height());
+    vector<CustomMatrix> windows;
 
-    // Get the pixel value as an ARGB integer (QRgb is a typedef for unsigned int)
-    for(int i = 1; i < image.width()-1;i++){
-        for(int j = 1; j < image.height()-1;j++){
-            bool local_window[3][3] = {false};
+    for(int i = 0; i < width - WINDOW_SIZE; i++){
+        for(int j = 0; j < height - WINDOW_SIZE; j++){
 
-            for(int m=-1;m<=1;m++){
-                for(int n=-1;n<=1;n++){
-                    QRgb rgbValue = image.pixel(i+m, j+n);
-                    local_window[m+1][n+1] = (rgbValue != 0xffffffff);
+            bool local_window[WINDOW_SIZE][WINDOW_SIZE] = {false};
+
+            for(int m = 0; m < WINDOW_SIZE; m++){
+                for(int n = 0; n < WINDOW_SIZE; n++){
+                    QRgb rgbValue = image.pixel(i + m, j + n);
+
+                    local_window[m][n] = (rgbValue != 0xffffffff);
                 }
             }
 

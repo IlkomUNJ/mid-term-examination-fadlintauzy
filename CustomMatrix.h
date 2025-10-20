@@ -7,27 +7,27 @@ using namespace std;
 
 class CustomMatrix{
 public:
-    bool mat[3][3]={0};
+    bool mat[10][10] = {false};
     CustomMatrix(){
 
     }
 
-    //alternate way to instantiate the class
-    CustomMatrix(bool m[3][3]){
-        const int m_size = sizeof(m) / sizeof(m[0]);
-        for (int i=0;i< m_size;i++) {
-            for(int j=0; j < sizeof(m[0]);j++){
-                //cout << i << " " << j << endl;
+    CustomMatrix(const bool m[10][10]){
+        // Hardcode the dimensions 10x10 for the copy loop
+        for (int i=0; i < 10; i++) {
+            for(int j=0; j < 10; j++){
+                // Copy the value
                 mat[i][j] = m[i][j];
             }
         }
     }
 
-    void fillMatrix(bool m[3][3]){
-        const int m_size = sizeof(m) / sizeof(m[0]);
-        for (int i=0;i< m_size;i++) {
-            for(int j=0; j < sizeof(m[0]);j++){
-                //cout << i << " " << j << endl;
+    // **CHANGED**: The fillMatrix function now handles a 10x10 array
+    void fillMatrix(const bool m[10][10]){
+        // Hardcode the dimensions 10x10 for the copy loop
+        for (int i=0; i < 10; i++) {
+            for(int j=0; j < 10; j++){
+                // Copy the value
                 mat[i][j] = m[i][j];
             }
         }
