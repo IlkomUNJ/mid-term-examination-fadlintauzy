@@ -9,6 +9,7 @@ Answer
 
 2. untuk window yang cukup dalam memvisualisasikan segment menurut saya dari windows 8 x 8 tetapi hanya menampilkan tempat bertemunya saja, untuk ukuran window   seperti 9x9 dst,sudah dapat memvisualisasikan secara baik bahkan dari proses menuju pertemuan kedua garis tersebut tetapi untuk akhir saya memilih window 10x10 agar lebih jelas lagi proses dari sebelum bertemu hingga bertemu dan menjauh lagi.
 
+3.saya sudah mengimplementasikan matriks 10x10 tetapi belum bisa menggambar di intersectionnya
 
 
 
