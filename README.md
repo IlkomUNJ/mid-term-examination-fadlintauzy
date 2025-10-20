@@ -2,4 +2,4 @@
 Nama :Fadlintauzy WIlman Putra
 NIM  :1313623068    
 
-AI Prompot: https://gemini.google.com/share/2059c31e8e90
+AI Prompt: https://gemini.google.com/share/2059c31e8e90
